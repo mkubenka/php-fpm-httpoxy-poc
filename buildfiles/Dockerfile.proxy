@@ -1,0 +1,9 @@
+FROM alpine:3.3
+
+RUN apk --update add nmap-ncat && rm -f /var/cache/apk/*
+
+EXPOSE 8182 9192
+
+COPY buildfiles/proxy/default.http /
+
+CMD ["/bin/sh", "-c", "ncat -vvvkl -p 8182 -o /dev/stdout --sh-exec \"echo -e 'HTTP/1.1 200 OK\\r\\n'\""]

@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    php:
+        build:
+            context: .
+            dockerfile: buildfiles/Dockerfile.php
+        volumes:
+            - "./:/var/www/html"
+        ports:
+            - "8081:80"
+        links:
+            - proxy
+    proxy:
+        build:
+            context: .
+            dockerfile: buildfiles/Dockerfile.proxy
+
